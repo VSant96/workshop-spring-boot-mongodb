@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.victorsantos.workshopmongodb.domain.Post;
 import com.victorsantos.workshopmongodb.domain.User;
 import com.victorsantos.workshopmongodb.dto.AuthorDTO;
+import com.victorsantos.workshopmongodb.dto.CommentDTO;
 import com.victorsantos.workshopmongodb.repositories.PostRepository;
 import com.victorsantos.workshopmongodb.repositories.UserRepository;
 
@@ -35,6 +36,13 @@ public class Instantiation implements CommandLineRunner{
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		Post post1 = new Post(null,sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para são paulo, abraços", new AuthorDTO(maria));
 		Post post2 = new Post(null,sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!",new AuthorDTO(maria));
+		
+		CommentDTO c1 = new CommentDTO("Boa viagem mano",sdf.parse("21/03/2018"),new AuthorDTO(alex));
+		CommentDTO c2 = new CommentDTO("Aproveite",sdf.parse("22/03/2018"),new AuthorDTO(bob));
+		CommentDTO c3 = new CommentDTO("Tenha um ótimo dia",sdf.parse("23/03/2018"),new AuthorDTO(alex));
+		
+		post1.getComments().addAll(Arrays.asList(c1,c2));
+		post2.getComments().addAll(Arrays.asList(c3));
 		
 		postRepository.deleteAll();
 		postRepository.saveAll(Arrays.asList(post1,post2));
