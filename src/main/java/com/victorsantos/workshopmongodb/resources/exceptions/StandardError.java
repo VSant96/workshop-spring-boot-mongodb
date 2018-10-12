@@ -1,4 +1,4 @@
-package com.victorsantos.workshopmongodb.resources;
+package com.victorsantos.workshopmongodb.resources.exceptions;
 
 import java.io.Serializable;
 
